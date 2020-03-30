@@ -19,12 +19,15 @@
   },
   "homepage": "https://github.com/saltamay/simply_v2#readme",
   "dependencies": {
+    "apollo-server-express": "^2.11.0",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "graphql": "^14.6.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.3",
+    "@types/graphql": "^14.5.0",
     "@types/node": "^13.9.5",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
