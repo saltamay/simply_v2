@@ -14,7 +14,6 @@
  *  bathrooms: number;   // 15
  * }
  */
-
 interface Listing {
   imgSrc: string;
   price: string;
