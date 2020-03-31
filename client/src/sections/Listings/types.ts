@@ -1,4 +1,4 @@
-interface Listing {
+export interface Listing {
   id: string;
   imgSrc: string;
   price: string;
