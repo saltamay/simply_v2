@@ -14,7 +14,7 @@ const mount = async (app: Application) => {
     resolvers,
     context: () => ({ db })
   });
-  server.applyMiddleware({ app, path: '/api' });
+  server.applyMiddleware({ app, path: '/api/v1/graphql' });
 
   app.listen(PORT);
 
