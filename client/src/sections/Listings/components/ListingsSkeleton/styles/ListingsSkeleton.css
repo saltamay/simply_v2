@@ -1,3 +1,11 @@
 .listings-skeleton {
-  padding-top: 30px;
+  margin-top: 30px;
+}
+
+.listings-skeleton .listings-skeleton__title {
+  margin-bottom: 20px;
+}
+
+.listings-skeleton .listings-skeleton__alert {
+  margin-bottom: 20px;
 }

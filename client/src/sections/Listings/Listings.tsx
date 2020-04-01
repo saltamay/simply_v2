@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { gql, from } from 'apollo-boost';
-import { List, Avatar, Button, Spin } from 'antd';
+import { gql } from 'apollo-boost';
+import { Alert, List, Avatar, Button, Spin } from 'antd';
 import { ListingsSkeleton } from './components/ListingsSkeleton';
 import { Listings as ListingsData } from './__generated__/Listings';
 import {
@@ -84,21 +84,27 @@ export const Listings = ({ title }: Props) => {
   }
 
   if (error) {
-    return <h2>Uh oh! Something went wrong - please try again later :(</h2>;
+    return (
+      <div className='listings'>
+        <ListingsSkeleton title={title} error />
+      </div>
+    );
   }
 
-  const deleteListingErrorMessage = deleteListingError ? (
-    <h4>
-      Uh oh! Something went wrong with deleting :(. Please try again soon.
-    </h4>
+  const deleteListingErrorAlert = deleteListingError ? (
+    <Alert
+      message='Uh oh! Something went wrong with deleting :(. Please try again soon.'
+      type='error'
+      showIcon
+      className='listings__alert'
+    />
   ) : null;
 
   return (
     <div className='listings'>
+      {deleteListingErrorAlert}
       <h2>{title}</h2>
       <Spin spinning={deleteListingLoading}>{listingsList}</Spin>
-
-      {deleteListingErrorMessage}
     </div>
   );
 };
