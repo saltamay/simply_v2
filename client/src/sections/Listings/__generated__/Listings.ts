@@ -12,6 +12,7 @@ export interface Listings_listings {
   id: string;
   address: string;
   price: string;
+  imgSrc: string;
 }
 
 export interface Listings {

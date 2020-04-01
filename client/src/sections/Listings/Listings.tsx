@@ -1,11 +1,14 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { List, Avatar, Button, Spin } from 'antd';
 import { Listings as ListingsData } from './__generated__/Listings';
 import {
   DeleteListing as DeleteListingData,
   DeleteListingVariables
 } from './__generated__/DeleteListing';
+
+import './styles/Listings.css';
 
 const LISTINGS = gql`
   query Listings {
@@ -13,6 +16,7 @@ const LISTINGS = gql`
       id
       address
       price
+      imgSrc
     }
   }
 `;
@@ -23,6 +27,7 @@ const DELETE_LISTING = gql`
       id
       address
       price
+      imgSrc
     }
   }
 `;
@@ -48,18 +53,25 @@ export const Listings = ({ title }: Props) => {
   const listings = data ? data.listings : null;
 
   const listingsList = listings ? (
-    <ul>
-      {listings.map(listing => {
-        return (
-          <li key={listing.id}>
-            {listing.address}
-            <button onClick={() => handleDeleteListing(listing.id)}>
+    <List
+      itemLayout='horizontal'
+      dataSource={listings}
+      renderItem={listing => (
+        <List.Item
+          actions={[
+            <Button onClick={() => handleDeleteListing(listing.id)}>
               Delete
-            </button>
-          </li>
-        );
-      })}
-    </ul>
+            </Button>
+          ]}
+        >
+          <List.Item.Meta
+            title={listing.address}
+            description={listing.price}
+            avatar={<Avatar src={listing.imgSrc} shape='square' size={48} />}
+          />
+        </List.Item>
+      )}
+    />
   ) : null;
 
   if (loading) {
@@ -70,10 +82,6 @@ export const Listings = ({ title }: Props) => {
     return <h2>Uh oh! Something went wrong - please try again later :(</h2>;
   }
 
-  const deleteListingLoadingMessage = deleteListingLoading ? (
-    <h4>Deletion in progress...</h4>
-  ) : null;
-
   const deleteListingErrorMessage = deleteListingError ? (
     <h4>
       Uh oh! Something went wrong with deleting :(. Please try again soon.
@@ -81,11 +89,13 @@ export const Listings = ({ title }: Props) => {
   ) : null;
 
   return (
-    <>
-      <h2>{title}</h2>
-      {listingsList}
-      {deleteListingLoadingMessage}
+    <div className='listings'>
+      <Spin spinning={deleteListingLoading}>
+        <h2>{title}</h2>
+        {listingsList}
+      </Spin>
+
       {deleteListingErrorMessage}
-    </>
+    </div>
   );
 };

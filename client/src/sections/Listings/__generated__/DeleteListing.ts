@@ -12,6 +12,7 @@ export interface DeleteListing_deleteListing {
   id: string;
   address: string;
   price: string;
+  imgSrc: string;
 }
 
 export interface DeleteListing {

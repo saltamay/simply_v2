@@ -5,16 +5,16 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { Listings } from './sections/Listings';
 import * as serviceWorker from './serviceWorker';
 
+import './styles/index.css';
+
 const client = new ApolloClient({
   uri: '/api/v1/graphql'
 });
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Listings title='Tiny Bungalow Listings' />
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <Listings title='Tiny Bungalow Listings' />
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
