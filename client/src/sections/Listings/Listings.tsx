@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { gql, from } from 'apollo-boost';
 import { List, Avatar, Button, Spin } from 'antd';
+import { ListingsSkeleton } from './components/ListingsSkeleton';
 import { Listings as ListingsData } from './__generated__/Listings';
 import {
   DeleteListing as DeleteListingData,
@@ -75,7 +76,11 @@ export const Listings = ({ title }: Props) => {
   ) : null;
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className='listings'>
+        <ListingsSkeleton title={title} />
+      </div>
+    );
   }
 
   if (error) {
@@ -90,10 +95,8 @@ export const Listings = ({ title }: Props) => {
 
   return (
     <div className='listings'>
-      <Spin spinning={deleteListingLoading}>
-        <h2>{title}</h2>
-        {listingsList}
-      </Spin>
+      <h2>{title}</h2>
+      <Spin spinning={deleteListingLoading}>{listingsList}</Spin>
 
       {deleteListingErrorMessage}
     </div>
