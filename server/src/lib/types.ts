@@ -1,5 +1,10 @@
 import { Collection, ObjectId } from 'mongodb';
 
+export enum ListingStatus {
+  For_Sale = 'FOR_SALE',
+  For_Rent = 'FOR_RENT',
+}
+
 export interface Listing {
   _id: ObjectId;
   imgSrc: string;
@@ -8,12 +13,24 @@ export interface Listing {
   address: string;
   zipcode: string;
   city: string;
-  state: string;
-  status: string;
+  country: string;
+  admin: string;
+  status: ListingStatus;
   bedrooms: number;
   bathrooms: number;
 }
 
+export interface User {
+  _id: string;
+  token: string;
+  name: string;
+  avatar: string;
+  email: string;
+  savedListings: ObjectId[];
+  viewedListings: ObjectId[];
+}
+
 export interface Database {
   listings: Collection<Listing>;
+  users: Collection<User>;
 }
