@@ -1,8 +1,8 @@
 import { Collection, ObjectId } from 'mongodb';
 
 export enum ListingStatus {
-  For_Sale = 'FOR_SALE',
-  For_Rent = 'FOR_RENT',
+  ForSale = 'FOR_SALE',
+  ForRent = 'FOR_RENT',
 }
 
 export interface Listing {
