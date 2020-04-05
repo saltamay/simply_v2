@@ -1,6 +1,10 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
+  input LogInInput {
+    code: String!
+  }
+
   type Listing {
     id: ID!
     imgSrc: String!
@@ -15,6 +19,13 @@ export const typeDefs = gql`
     bathrooms: Int!
   }
 
+  type Viewer {
+    id: ID
+    token: String
+    avatar: String
+    didRequest: Boolean!
+  }
+
   type Query {
     listings: [Listing!]!
     authUrl: String!
@@ -22,7 +33,7 @@ export const typeDefs = gql`
 
   type Mutation {
     deleteListing(id: ID!): Listing
-    logIn: String!
-    logOut: String!
+    logIn(input: LogInInput): Viewer!
+    logOut: Viewer!
   }
 `;

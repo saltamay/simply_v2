@@ -30,6 +30,13 @@ export interface User {
   viewedListings: ObjectId[];
 }
 
+export interface Viewer {
+  _id?: string;
+  token?: string;
+  avatar?: string;
+  didRequest: boolean;
+}
+
 export interface Database {
   listings: Collection<Listing>;
   users: Collection<User>;
